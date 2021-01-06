@@ -23,7 +23,7 @@ cdef list __readSTDF(char *file_name, array.array record_type, int n):
 
     f = _cstdf.stdf_open(file_name)
     if f == NULL:
-        fprintf(stderr, "Error: %s is not a valid STDF file.\n", file_name)
+        fprintf(stderr, b"Error: %s is not a valid STDF file.\n", file_name)
         return l
     # _cstdf.stdf_get_setting(f, _cstdf.STDF_SETTING_VERSION, &stdf_ver)
     rec = _cstdf.stdf_read_record_raw(f)
@@ -84,7 +84,7 @@ cdef list __readSTDF(char *file_name, array.array record_type, int n):
             elif recname == 5030:
                 l.append((recname, (<_cstdf.stdf_rec_dtr *>rec)[0]))
             else:
-                fprintf(stderr, 'Unknown Record! REC_TYP: %d, REC_SUB: %d\n', rec.header.REC_TYP, rec.header.REC_SUB)
+                fprintf(stderr, b"Unknown Record! REC_TYP: %d, REC_SUB: %d\n", rec.header.REC_TYP, rec.header.REC_SUB)
             n -= 1
         _cstdf.stdf_free_record(rec)
         rec = _cstdf.stdf_read_record(f)

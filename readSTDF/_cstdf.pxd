@@ -1,3 +1,5 @@
+# cython: language_level=3, boundscheck=False, wraparound=False
+
 cdef extern from "_parse_records.h":
     ctypedef enum stdf_dtc_Vn_type:
         STDF_GDR_B0 = 0
